@@ -36,7 +36,7 @@ function App() {
             <UserBar />
             <hr />
             {
-              posts.length > 0 ? <List posts={posts} /> : <b>No posts yet</b>
+              posts.length > 0 ? <List /> : <b>No posts yet</b>
             }
             <hr />
             {

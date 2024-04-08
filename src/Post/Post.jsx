@@ -5,7 +5,7 @@ export default function Post ({ post }) {
         <React.Fragment>
             <h3>{post.title}</h3>
             <p>{post.content}</p>
-            <p>{post.author}</p>
+            <p>Author: {post.author}</p>
         </React.Fragment>
     )
 }

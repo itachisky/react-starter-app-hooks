@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { StateContext } from '../Context/StateContext';
 
-export default function Create ({ user, dispatch }) {
+export default function Create () {
+    const { state, dispatch} = useContext(StateContext);
+    const { user } = state;
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
 
