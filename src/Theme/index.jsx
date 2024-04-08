@@ -1,7 +1,4 @@
-const Themes = [
-    { primaryColor: 'deepskyblue', secondaryColor: 'coral' },
-    { primaryColor: 'orchid', secondaryColor: 'mediumseagreen' }
-];
+import { useEffect, useState } from "react";
 
 function ThemeItem ({ theme, active, onCLick }) {
     return (
@@ -15,6 +12,15 @@ function ThemeItem ({ theme, active, onCLick }) {
 }
 
 export default function ChangeTheme ({ theme, setTheme }) {
+
+    const [themes, setThemes] = useState([])
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_BACKEND_URL}/data/themesOptions`)
+        .then((res) => res.json())
+        .then(({ value }) => setThemes(value))
+    }, [])
+
     function isActive (t) {
         return t.primaryColor === theme.primaryColor && t.secondaryColor === theme.secondaryColor
     }
@@ -23,7 +29,7 @@ export default function ChangeTheme ({ theme, setTheme }) {
         <div>
             Change Theme:
             {
-                Themes.map((t, i) => (
+                themes.map((t, i) => (
                     <ThemeItem key={`theme-${i}`} theme={t} active={isActive(t)} onCLick={() => setTheme(t)} />
                 ))
             }

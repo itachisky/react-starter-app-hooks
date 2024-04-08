@@ -1,4 +1,4 @@
-import React, { useReducer, useState } from "react";
+import React, { useEffect, useReducer, useState } from "react";
 import UserBar from "./User/UserBar";
 import List from "./Post/List";
 import Create from "./Post/Create";
@@ -22,10 +22,17 @@ function App() {
     posts: []
   };
 
+  
   const [state, dispatch] = useReducer(appReducer, initialState);
   const { user, posts } = state;
   const [theme, setTheme] = useState(initialTheme)
 
+  useEffect(() => {
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/data/posts`)
+    .then((res) => res.json())
+    .then(({ value }) => dispatch({ type: 'FETCH_POSTS', payload: value }))
+  }, []);
+  
   return (
     <React.Fragment>
       <StateContext.Provider value={{ state, dispatch }}>
