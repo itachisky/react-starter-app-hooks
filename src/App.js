@@ -28,7 +28,7 @@ function App() {
   const [theme, setTheme] = useState(initialTheme)
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_BACKEND_URL}/data/posts`)
+    fetch(`${process.env.REACT_APP_BACKEND_URL}/posts/list`)
     .then((res) => res.json())
     .then(({ value }) => dispatch({ type: 'FETCH_POSTS', payload: value }))
   }, []);
